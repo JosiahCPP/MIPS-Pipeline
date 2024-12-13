@@ -1,0 +1,25 @@
+module wb_stage_tb;
+    // Inputs
+    reg [31:0] mem_Read_Data;
+    reg [31:0] mem_ALU_result;
+    reg MemtoReg;
+    wire [31:0] wb_data;
+
+    wb_stage uut (
+        .mem_Read_Data(mem_Read_Data),
+        .mem_ALU_result(mem_ALU_result),
+        .MemtoReg(MemtoReg),
+        .wb_data(wb_data)
+    );
+
+    initial begin
+        // Test memory data selection
+        mem_Read_Data = 32'hAAAA5555; mem_ALU_result = 32'h12345678; MemtoReg = 0; #10;
+        
+        // Test ALU result selection
+        MemtoReg = 1; #10;
+
+        $finish;
+    end
+
+endmodule
